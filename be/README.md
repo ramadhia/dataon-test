@@ -7,6 +7,7 @@ docker compose -f docker-compose.yaml up
 ```
 
 ### Init Project Golang
+- Please rename file `env.example` to `.env`
 - Please run this command in the BE project
 ```bash
 go mod download
