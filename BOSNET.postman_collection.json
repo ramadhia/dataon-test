@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "97718f26-64a6-4a8f-9d50-dc7cfb9fe323",
+		"name": "BOSNET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3473167"
+	},
+	"item": [
+		{
+			"name": "Tarik",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromSzAccountId\": \"000108757484\",\n    \"szCurrencyId\": \"USD\",\n    \"decAmount\": 3\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/tarik"
+			},
+			"response": []
+		},
+		{
+			"name": "Setor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"toSzAccountId\": \"000108888888\",\n    \"szCurrencyId\": \"SGD\",\n    \"decAmount\": 0.25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/setor"
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromSzAccountId\": \"000108888888\",\n    \"toSzAccountId\": \"000109999999\",\n    \"szCurrencyId\": \"SGD\",\n    \"decAmount\": 0.75000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/history?startDtmTransaction=2024-10-01T18:09:03.43Z&endDtmTransaction=2024-11-30 18:09:55.397&szAccountId=000109999999",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"history"
+					],
+					"query": [
+						{
+							"key": "startDtmTransaction",
+							"value": "2024-10-01T18:09:03.43Z"
+						},
+						{
+							"key": "endDtmTransaction",
+							"value": "2024-11-30 18:09:55.397"
+						},
+						{
+							"key": "szAccountId",
+							"value": "000109999999"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

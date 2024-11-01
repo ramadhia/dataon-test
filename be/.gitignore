@@ -1,0 +1,11 @@
+vendor/
+.env
+.vscode/
+debug
+.idea/
+.venv/
+app.yml
+*.out
+local_config.env
+bin/
+!bin/.keep
