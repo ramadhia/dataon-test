@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "d78caaf7-14c4-41aa-ba0c-8ee3d97c11e4",
+		"name": "MNC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3473167"
+	},
+	"item": [
+		{
+			"name": "Transactions - Fetch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODg3NTgxZDEtZGE5OS00MDU0LTkwOTEtZWY2NTVlOTI2M2Q4IiwiaXNzIjoicmFmbGktYXBpLmFwcCIsInN1YiI6Ijg4NzU4MWQxLWRhOTktNDA1NC05MDkxLWVmNjU1ZTkyNjNkOCIsImV4cCI6MTczMTU4NjIwOCwianRpIjoiOTE0NTIyZjgtMWQ3MS00MTAyLWEyYTgtNDFiNGExZGM5NTk2In0.D_JfkyIy17a74ILI2_u1PE9iBJSe9D7NXW0OAD39yNI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:15000/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "15000",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions - Transafer Test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODg3NTgxZDEtZGE5OS00MDU0LTkwOTEtZWY2NTVlOTI2M2Q4IiwiaXNzIjoicmFmbGktYXBpLmFwcCIsInN1YiI6Ijg4NzU4MWQxLWRhOTktNDA1NC05MDkxLWVmNjU1ZTkyNjNkOCIsImV4cCI6MTczMTYwOTQ2NiwianRpIjoiYWNiZWY4NDEtYjc2OC00NDE4LWE2YzUtMTBhN2JkNWU4MjQxIn0.um1LgUSv7j31IujUKEpPDgXneZ-B4Naaj9gdBXtDHKU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refers_trx_id\": \"7ad0c49b-7fd8-4a60-8335-b655cee0e825\",\n    \"refers_user_id\": \"887581d1-da99-4054-9091-ef655e9263d8\",\n    \"target_user_id\": \"ee66eb7b-488f-4dd3-a801-9e6e68e15f26\",\n    \"transaction_method\": \"BANK_TRANSFER\",\n    \"transaction_type\": \"DEBIT\",\n    \"amount\": 500,\n    \"remarks\": \"Hadiah Ultah\",\n    \"created_date\": \"2024-11-14T12:30:00Z\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/transafer-test",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"transafer-test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - Topup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWIzMTI5NWItZGI2MS00ZmIwLTgwYmQtYzFmYzgwZDJhY2U5IiwiaXNzIjoiYXBpIiwic3ViIjoiNWIzMTI5NWItZGI2MS00ZmIwLTgwYmQtYzFmYzgwZDJhY2U5IiwiZXhwIjoxNzMxNjI2NzQ3LCJqdGkiOiJkNjE0Y2ZkZS1iZWYzLTQ4M2UtYjliMy0wOGRmN2Q2OGRjZjIifQ.WIBmLCu-l6pcqSduYf98EhkZL180rfx34W-C48Nbo0Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/topup",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"topup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - Payment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODg3NTgxZDEtZGE5OS00MDU0LTkwOTEtZWY2NTVlOTI2M2Q4IiwiaXNzIjoicmFmbGktYXBpLmFwcCIsInN1YiI6Ijg4NzU4MWQxLWRhOTktNDA1NC05MDkxLWVmNjU1ZTkyNjNkOCIsImV4cCI6MTczMTYyMzM4NywianRpIjoiOWNiN2VjMjEtNWYzNC00MDQ4LTg0N2YtOTVhYTIzOTkxMjRkIn0.-FFpuhn4ymHdwekwmeNj1POP2qa2l6of5X1y1JJHV0Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100,\n    \"remarks\": \"Pulsa Telkomsel 100k\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/pay",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - Transfer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWIzMTI5NWItZGI2MS00ZmIwLTgwYmQtYzFmYzgwZDJhY2U5IiwiaXNzIjoiYXBpIiwic3ViIjoiNWIzMTI5NWItZGI2MS00ZmIwLTgwYmQtYzFmYzgwZDJhY2U5IiwiZXhwIjoxNzMxNjI2NzQ3LCJqdGkiOiJkNjE0Y2ZkZS1iZWYzLTQ4M2UtYjliMy0wOGRmN2Q2OGRjZjIifQ.WIBmLCu-l6pcqSduYf98EhkZL180rfx34W-C48Nbo0Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"target_user\": \"a556766d-bb02-47b1-903b-d3b66804f91d\",\n    \"amount\": 10000,\n    \"remarks\": \"Hutang\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Joko\",\n    \"last_name\": \"Widodo\",\n    \"phone_number\": \"021123456789\",\n    \"address\": \"Jl. Solo Balapan\",\n    \"pin\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/register",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Prabowo\",\n    \"last_name\": \"Saputro3\",\n    \"address\": \"Jl. Kebon Sirih No.asdadadsasda\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Prabowo\",\n    \"last_name\": \"Saputro3\",\n    \"address\": \"Jl. Kebon Sirih No. 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:15000/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "15000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_number\": \"021123456789\",\n    \"pin\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:40001/login",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
