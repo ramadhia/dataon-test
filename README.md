@@ -20,37 +20,6 @@ Follow these steps to get the project up and running on your local machine.
 ```bash
 go mod download
 ```
-
-### 2. Algo Test
-
-#### Test 1
-Run the following command for **Test 1**:
-
-```bash
-go run github.com/ramadhia/dataon-test/cmd/dataon algo-test1
-```
-
-#### Test 2
-Run the following command for **Test 2**, where you can specify the total amount and the amount paid:
-
-```bash
-go run github.com/ramadhia/dataon-test/cmd/dataon algo-test2 --total-belanja=52312 --uang-dibayar=100000
-```
-
-#### Test 3
-Run the following command for **Test 3**:
-
-```bash
-go run github.com/ramadhia/dataon-test/cmd/dataon algo-test3
-```
-
-#### Test 4
-Run the following command for **Test 4**, where you specify the number of vacation days, leave duration, and join date:
-
-```bash
-go run github.com/ramadhia/dataon-test/cmd/dataon algo-test4 --cuti-bersama=7 --cuti-durasi=1 --join-date=2021-05-01 --join-date=2021-07-05
-```
-
 ---
 
 ### 3. Backend
@@ -66,9 +35,7 @@ docker compose -f docker-compose.yaml up
 This command will pull the necessary images and start the services defined in the `docker-compose.yaml` file, including:
 
 - **Backend API**: Running at port `40001`
-- **Worker Server**: Responsible for handling background tasks
 - **PostgreSQL**: Database service
-- **RabbitMQ**: Message queue service, Dashboard queue running at `localhost:15672`
 
 #### 3.2 Initialize the Golang Project
 
@@ -85,6 +52,7 @@ go mod download
 - Create a PostgreSQL database. For this project, we’ll use `dbrafli` as the database name. You can use a PostgreSQL client to create it manually or automate the process.
 - Once the database is created, run the database migrations to set up the schema:
 - Or you can check the path of migrations file at ``database/migration``
+- This proses will produces the data seed for testing 
 
 ```bash
 make migrate
@@ -110,10 +78,9 @@ make run-worker
 #### 3.6 Accessing Services
 
 - **Backend API**: Accessible on `http://localhost:40001`
-- **RabbitMQ Management UI**: Accessible on `http://localhost:15672` (username: `guest`, password: `guest`)
 - **PostgreSQL**: Accessible on `localhost:45432` (username: `root`, password: `password`)
 
 ---
 
-### Postman Collection
-- you can download the Postman collection file on this project ``MNC.postman_collection.json``
+### Example Response
+- you can download the example response file on this project ``example-response.json``
