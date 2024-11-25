@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/ramadhia/mnc-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/config"
 
 	"github.com/gin-contrib/cors"
 )

@@ -1,4 +1,4 @@
-APP_NAME=backend
+APP_NAME=dataon
 VERSION_VAR=main.Version
 VERSION=$(shell git describe --tags)
 MOCKERY_VERSION=2.16.0
@@ -34,20 +34,20 @@ hooks:
 
 run-api: dep
 	@echo ">> Running API Server"
-	@env $$(cat .env | xargs) go run github.com/ramadhia/mnc-test/cmd/cli server
+	@env $$(cat .env | xargs) go run github.com/ramadhia/dataon-test/cmd/dataon server
 
-run-worker: dep
-	@echo ">> Running Worker Server"
-	@env $$(cat .env | xargs) go run github.com/ramadhia/mnc-test/cmd/cli worker
-
-run-rabbit:
-	@echo ">> Starting RabbitMQ"
-	#docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password rabbitmq:latest
-	docker run -d --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+#run-worker: dep
+#	@echo ">> Running Worker Server"
+#	@env $$(cat .env | xargs) go run github.com/ramadhia/dataon-test/cmd/dataon worker
+#
+#run-rabbit:
+#	@echo ">> Starting RabbitMQ"
+#	#docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password rabbitmq:latest
+#	docker run -d --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 
 migrate: dep
 	@echo ">> Running DB migration"
-	@env $$(cat .env | xargs) go run github.com/ramadhia/mnc-test/cmd/cli migrate
+	@env $$(cat .env | xargs) go run github.com/ramadhia/dataon-test/cmd/dataon migrate
 
 dep-mock:
 ifeq (, $(shell which mockery))

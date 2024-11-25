@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/model"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/model"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"

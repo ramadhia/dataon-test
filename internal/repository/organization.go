@@ -4,13 +4,14 @@ import (
 	"context"
 	"time"
 
-	"github.com/ramadhia/mnc-test/internal/model"
+	"github.com/ramadhia/dataon-test/internal/entity"
 )
 
-type TransactionRepository interface {
-	FetchTransaction(ctx context.Context, filter FetchTransactionFilter) ([]*model.Transaction, error)
-	AddTransaction(ctx context.Context, transaction model.Transaction) (*model.Transaction, error)
-	UpdateTransaction(ctx context.Context, transaction model.Transaction) error
+type OrganizationRepository interface {
+	FetchOrganization(ctx context.Context, filter FetchTransactionFilter) ([]*entity.Organization, error)
+	FetchComplete(ctx context.Context, filter FetchTransactionFilter) ([]*entity.Organization, error)
+	AddOrganization(ctx context.Context, transaction entity.Organization) (*entity.Organization, error)
+	UpdateOrganization(ctx context.Context, transaction entity.Organization) error
 }
 
 type FetchTransactionFilter struct {

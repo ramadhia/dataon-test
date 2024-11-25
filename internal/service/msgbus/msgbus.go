@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/ramadhia/mnc-test/internal/service"
+	"github.com/ramadhia/dataon-test/internal/service"
 	"log"
 	"os"
 	"os/signal"

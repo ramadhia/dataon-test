@@ -11,10 +11,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/handler/http/handler"
-	"github.com/ramadhia/mnc-test/internal/handler/http/middleware"
-	"github.com/ramadhia/mnc-test/internal/provider"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/handler/http/handler"
+	"github.com/ramadhia/dataon-test/internal/handler/http/middleware"
+	"github.com/ramadhia/dataon-test/internal/provider"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -34,8 +34,8 @@ type DefaultHttpServer struct {
 }
 
 type handlers struct {
-	transaction handler.Transaction
-	user        handler.User
+	organization handler.Organization
+	user         handler.User
 }
 
 func NewHttpServer(p *provider.Provider) *DefaultHttpServer {
@@ -51,8 +51,8 @@ func NewHttpServer(p *provider.Provider) *DefaultHttpServer {
 
 	// ini the handler
 	handlers := handlers{
-		transaction: *handler.NewTransaction(p),
-		user:        *handler.NewUser(p),
+		organization: *handler.NewOrganization(p),
+		user:         *handler.NewUser(p),
 	}
 
 	requestHandler := &DefaultHttpServer{p.Config(), engine, handlers}

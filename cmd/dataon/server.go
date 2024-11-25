@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 
-	"github.com/ramadhia/mnc-test/internal/handler/http"
-	"github.com/ramadhia/mnc-test/internal/provider"
-	"github.com/ramadhia/mnc-test/internal/repository/gorm"
-	"github.com/ramadhia/mnc-test/internal/usecase/transcation"
-	"github.com/ramadhia/mnc-test/internal/usecase/user"
+	"github.com/ramadhia/dataon-test/internal/handler/http"
+	"github.com/ramadhia/dataon-test/internal/provider"
+	"github.com/ramadhia/dataon-test/internal/repository/gorm"
+	"github.com/ramadhia/dataon-test/internal/usecase/organization"
+	"github.com/ramadhia/dataon-test/internal/usecase/user"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -33,12 +33,13 @@ func Server(pb provider.ProviderBuilder) *cobra.Command {
 			// -- set service
 
 			// -- set repo
-			app.SetTransactionRepo(gorm.NewTransactionRepo(db))
-			app.SetBalanceRepo(gorm.NewBalanceRepo(db))
+			app.SetGroupRepo(gorm.NewGroupRepo(db))
+			app.SetOrganizationRepo(gorm.NewOrganizationRepo(db))
 			app.SetUserRepo(gorm.NewUserRepo(db))
+			app.SetGroupRepo(gorm.NewGroupRepo(db))
 
 			// -- set usecase
-			app.SetTransactionUseCase(transcation.NewTransaction(app))
+			app.SetOrganizationUseCase(organization.NewOrganization(app))
 			app.SetUserUseCase(user.NewUser(app))
 
 			// Start Http Server

@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/storage"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/storage"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"

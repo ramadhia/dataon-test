@@ -22,25 +22,6 @@ services:
     volumes:
       - db:/data/postgres
 
-  rabbitmq:
-    image: rabbitmq:4-management-alpine
-    container_name: rabbitmq
-    restart: always
-    ports:
-      - "5672:5672"   # Port untuk komunikasi aplikasi
-      - "15672:15672" # Port untuk Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-    networks:
-      - net-svc
-    healthcheck:
-      test: [ "CMD-SHELL", "rabbitmqctl status" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-
   be-svc:
     container_name: be-svc
     build: .
@@ -60,32 +41,6 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DATABASE: ${DB_DATABASE}
       DB_PORT: 5432
-      SERVICE_PORT: ${SERVICE_PORT}
-      RABBITMQ_HOST: rabbitmq
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
-
-  worker-svc:
-    container_name: worker-svc
-    build: .
-    command: [ "./cli", "worker" ]  # Menjalankan worker
-    networks:
-      - net-svc
-    depends_on:
-      db:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    restart: always
-    environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_PORT: 5432
-      RABBITMQ_HOST: rabbitmq
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
 networks:
   net-svc:

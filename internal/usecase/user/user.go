@@ -5,41 +5,38 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"errors"
-	"time"
 
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/lib"
-	"github.com/ramadhia/mnc-test/internal/model"
-	"github.com/ramadhia/mnc-test/internal/provider"
-	"github.com/ramadhia/mnc-test/internal/repository"
-	"github.com/ramadhia/mnc-test/internal/usecase"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/entity"
+	"github.com/ramadhia/dataon-test/internal/provider"
+	"github.com/ramadhia/dataon-test/internal/repository"
+	"github.com/ramadhia/dataon-test/internal/usecase"
 
-	"github.com/samber/lo"
 	"github.com/sirupsen/logrus"
 )
 
 type UserImpl struct {
-	config      config.Config
-	userRepo    repository.UserRepository
-	balanceRepo repository.BalanceRepository
+	config   config.Config
+	userRepo repository.UserRepository
+	group    repository.GroupRepository
 }
 
 func NewUser(p *provider.Provider) *UserImpl {
 	return &UserImpl{
-		config:      p.Config(),
-		userRepo:    p.UserRepo(),
-		balanceRepo: p.BalanceRepo(),
+		config:   p.Config(),
+		userRepo: p.UserRepo(),
+		group:    p.GroupRepo(),
 	}
 }
 
 func (u *UserImpl) RegisterUser(ctx context.Context, req usecase.RegisterUserRequest) (*usecase.RegisterUserResponse, error) {
 	logger := logrus.WithField("method", "usecase.UserImpl.RegisterUser")
 
-	data := model.User{
-		FirstName:   req.FirstName,
-		LastName:    req.LastName,
+	data := entity.User{
+		GroupID:     req.GroupID,
+		EmployeeID:  req.EmployeeID,
+		Name:        req.Name,
 		PhoneNumber: req.PhoneNumber,
-		Address:     req.Address,
 		Pin:         u.getmd5(*req.Pin),
 	}
 
@@ -63,68 +60,51 @@ func (u *UserImpl) RegisterUser(ctx context.Context, req usecase.RegisterUserReq
 		return nil, err
 	}
 
-	logger.Info("about to create a balance data if register is done")
-	_, err = u.balanceRepo.UpsertBalance(ctx, model.Balance{
-		UserID: register.ID,
-		Amount: lo.ToPtr(float64(0)),
-	})
-	if err != nil {
-		logger.Warning(err.Error())
-		return nil, err
-	}
-
 	logger.Info("Register successfully")
 	return &usecase.RegisterUserResponse{
 		UserID:      register.ID,
-		FirstName:   register.FirstName,
-		LastName:    register.LastName,
+		GroupID:     register.GroupID,
+		EmployeeID:  register.EmployeeID,
+		Name:        register.Name,
 		PhoneNumber: register.PhoneNumber,
-		Address:     register.Address,
 		CreatedDate: register.CreatedDate,
 	}, nil
 }
 
-func (u *UserImpl) LoginUser(ctx context.Context, req usecase.LoginUserRequest) (*usecase.LoginUserResponse, error) {
-	logger := logrus.WithField("method", "usecase.UserImpl.LoginUser")
+//func (u *UserImpl) LoginUser(ctx context.Context, req usecase.LoginUserRequest) (*usecase.LoginUserResponse, error) {
+//	logger := logrus.WithField("method", "usecase.UserImpl.LoginUser")
+//
+//	user, err := u.userRepo.GetUser(ctx, repository.GetUserRequest{
+//		PhoneNumber: req.PhoneNumber,
+//		Pin:         u.getmd5(*req.Pin),
+//	})
+//	if err != nil {
+//		logger.Warning(err.Error())
+//		return nil, err
+//	}
+//	if user == nil {
+//		logger.Warning("user not found")
+//		return nil, errors.New("phone Number and PIN doesn’t match")
+//	}
+//
+//	accessToken, refreshToken, err := lib.GenerateTokens(model.Claim{
+//		ID: *user.ID,
+//	})
+//	if err != nil {
+//		logger.Warning("error when generate the tokens")
+//		return nil, err
+//	}
+//
+//	logger.Info("Login successfully")
+//	return &usecase.LoginUserResponse{
+//		AccessToken:  &accessToken,
+//		RefreshToken: &refreshToken,
+//	}, nil
+//}
 
-	user, err := u.userRepo.GetUser(ctx, repository.GetUserRequest{
-		PhoneNumber: req.PhoneNumber,
-		Pin:         u.getmd5(*req.Pin),
-	})
-	if err != nil {
-		logger.Warning(err.Error())
-		return nil, err
-	}
-	if user == nil {
-		logger.Warning("user not found")
-		return nil, errors.New("phone Number and PIN doesn’t match")
-	}
-
-	accessToken, refreshToken, err := lib.GenerateTokens(model.Claim{
-		ID: *user.ID,
-	})
-	if err != nil {
-		logger.Warning("error when generate the tokens")
-		return nil, err
-	}
-
-	logger.Info("Login successfully")
-	return &usecase.LoginUserResponse{
-		AccessToken:  &accessToken,
-		RefreshToken: &refreshToken,
-	}, nil
-}
-
-func (u *UserImpl) UpdateUser(ctx context.Context, claim model.Claim, req usecase.UpdateProfileRequest) (res *usecase.UpdateProfileResponse, err error) {
+func (u *UserImpl) UpdateUser(ctx context.Context, data entity.User) (res *usecase.UpdateProfileResponse, err error) {
 	logger := logrus.WithField("method", "usecase.UserImpl.UpdateUser")
 
-	data := model.User{
-		ID:          &claim.ID,
-		FirstName:   req.FirstName,
-		LastName:    req.LastName,
-		Address:     req.Address,
-		UpdatedDate: lo.ToPtr(time.Now()),
-	}
 	update, err := u.userRepo.UpdateUser(ctx, data)
 	if err != nil {
 		logger.Warning(err.Error())
@@ -133,21 +113,20 @@ func (u *UserImpl) UpdateUser(ctx context.Context, claim model.Claim, req usecas
 
 	res = &usecase.UpdateProfileResponse{
 		UserID:      update.ID,
-		FirstName:   update.FirstName,
-		LastName:    update.LastName,
+		GroupID:     update.GroupID,
+		EmployeeID:  update.EmployeeID,
+		Name:        update.Name,
 		PhoneNumber: update.PhoneNumber,
-		Address:     update.Address,
-		UpdatedDate: update.UpdatedDate,
 	}
 
 	return
 }
 
-func (u *UserImpl) GetUser(ctx context.Context, user model.Claim) (*model.User, error) {
+func (u *UserImpl) GetUser(ctx context.Context, user entity.User) (*entity.User, error) {
 	logger := logrus.WithField("method", "usecase.UserImpl.GetUser")
 
 	res, err := u.userRepo.GetUser(ctx, repository.GetUserRequest{
-		UserID: &user.ID,
+		UserID: user.ID,
 	})
 	if err != nil {
 		logger.Warning(err.Error())
@@ -156,6 +135,36 @@ func (u *UserImpl) GetUser(ctx context.Context, user model.Claim) (*model.User, 
 	if res == nil {
 		logger.Warning("user not found")
 		return nil, errors.New("user not found")
+	}
+
+	return res, nil
+}
+
+func (u *UserImpl) FetchUser(ctx context.Context, req usecase.FetchUserRequest) ([]*entity.User, error) {
+	logger := logrus.WithField("method", "usecase.UserImpl.GetUser")
+
+	res, err := u.userRepo.FetchUser(ctx, repository.FetchUserRequest{
+		OrganizationID: req.OrganizationID,
+	})
+	if err != nil {
+		logger.Warning(err.Error())
+		return nil, err
+	}
+	if res == nil {
+		logger.Warning("user not found")
+		return nil, errors.New("user not found")
+	}
+
+	return res, nil
+}
+
+func (u *UserImpl) DeleteUser(ctx context.Context, userId string) (bool, error) {
+	logger := logrus.WithField("method", "usecase.UserImpl.DeleteUser")
+
+	res, err := u.userRepo.DeleteUser(ctx, userId)
+	if err != nil {
+		logger.Warning(err.Error())
+		return false, err
 	}
 
 	return res, nil

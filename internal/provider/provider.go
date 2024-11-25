@@ -1,10 +1,10 @@
 package provider
 
 import (
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/repository"
-	"github.com/ramadhia/mnc-test/internal/service"
-	"github.com/ramadhia/mnc-test/internal/usecase"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/repository"
+	"github.com/ramadhia/dataon-test/internal/service"
+	"github.com/ramadhia/dataon-test/internal/usecase"
 
 	"gorm.io/gorm"
 )
@@ -28,15 +28,14 @@ type ServiceProvider struct {
 }
 
 type UsecaseProvider struct {
-	user        usecase.UserUsecase
-	transaction usecase.TransactionUsecase
-	algo        usecase.AlgoUsecase
+	user         usecase.UserUsecase
+	organization usecase.OrganizationUsecase
 }
 
 type RepositoryProvider struct {
-	user        repository.UserRepository
-	transaction repository.TransactionRepository
-	balance     repository.BalanceRepository
+	user         repository.UserRepository
+	group        repository.GroupRepository
+	organization repository.OrganizationRepository
 }
 
 func NewProvider() *Provider {
@@ -76,20 +75,12 @@ func (p *Provider) SetUserUseCase(u usecase.UserUsecase) {
 	p.usecase.user = u
 }
 
-func (p *Provider) TransactionUseCase() usecase.TransactionUsecase {
-	return p.usecase.transaction
+func (p *Provider) OrganizationUseCase() usecase.OrganizationUsecase {
+	return p.usecase.organization
 }
 
-func (p *Provider) SetTransactionUseCase(u usecase.TransactionUsecase) {
-	p.usecase.transaction = u
-}
-
-func (p *Provider) AlgoUseCase() usecase.AlgoUsecase {
-	return p.usecase.algo
-}
-
-func (p *Provider) SetAlgoUseCase(u usecase.AlgoUsecase) {
-	p.usecase.algo = u
+func (p *Provider) SetOrganizationUseCase(u usecase.OrganizationUsecase) {
+	p.usecase.organization = u
 }
 
 func (p *Provider) UserRepo() repository.UserRepository {
@@ -99,19 +90,18 @@ func (p *Provider) UserRepo() repository.UserRepository {
 func (p *Provider) SetUserRepo(r repository.UserRepository) {
 	p.repo.user = r
 }
-
-func (p *Provider) TransactionRepo() repository.TransactionRepository {
-	return p.repo.transaction
+func (p *Provider) GroupRepo() repository.GroupRepository {
+	return p.repo.group
 }
 
-func (p *Provider) SetTransactionRepo(r repository.TransactionRepository) {
-	p.repo.transaction = r
+func (p *Provider) SetGroupRepo(r repository.GroupRepository) {
+	p.repo.group = r
 }
 
-func (p *Provider) BalanceRepo() repository.BalanceRepository {
-	return p.repo.balance
+func (p *Provider) OrganizationRepo() repository.OrganizationRepository {
+	return p.repo.organization
 }
 
-func (p *Provider) SetBalanceRepo(r repository.BalanceRepository) {
-	p.repo.balance = r
+func (p *Provider) SetOrganizationRepo(r repository.OrganizationRepository) {
+	p.repo.organization = r
 }

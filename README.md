@@ -1,4 +1,4 @@
-# MNC Test
+# DataOn Test
 ## Prerequisites
 
 Before you begin, ensure you have the following tools installed on your machine:
@@ -27,28 +27,28 @@ go mod download
 Run the following command for **Test 1**:
 
 ```bash
-go run github.com/ramadhia/mnc-test/cmd/cli algo-test1
+go run github.com/ramadhia/dataon-test/cmd/dataon algo-test1
 ```
 
 #### Test 2
 Run the following command for **Test 2**, where you can specify the total amount and the amount paid:
 
 ```bash
-go run github.com/ramadhia/mnc-test/cmd/cli algo-test2 --total-belanja=52312 --uang-dibayar=100000
+go run github.com/ramadhia/dataon-test/cmd/dataon algo-test2 --total-belanja=52312 --uang-dibayar=100000
 ```
 
 #### Test 3
 Run the following command for **Test 3**:
 
 ```bash
-go run github.com/ramadhia/mnc-test/cmd/cli algo-test3
+go run github.com/ramadhia/dataon-test/cmd/dataon algo-test3
 ```
 
 #### Test 4
 Run the following command for **Test 4**, where you specify the number of vacation days, leave duration, and join date:
 
 ```bash
-go run github.com/ramadhia/mnc-test/cmd/cli algo-test4 --cuti-bersama=7 --cuti-durasi=1 --join-date=2021-05-01 --join-date=2021-07-05
+go run github.com/ramadhia/dataon-test/cmd/dataon algo-test4 --cuti-bersama=7 --cuti-durasi=1 --join-date=2021-05-01 --join-date=2021-07-05
 ```
 
 ---

@@ -1,4 +1,4 @@
-module github.com/ramadhia/mnc-test
+module github.com/ramadhia/dataon-test
 
 go 1.21
 

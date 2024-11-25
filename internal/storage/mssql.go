@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ramadhia/mnc-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/config"
 
 	"github.com/golang-migrate/migrate/v4"
 	sqlServerMigrate "github.com/golang-migrate/migrate/v4/database/sqlserver"

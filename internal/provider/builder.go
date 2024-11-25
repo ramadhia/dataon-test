@@ -3,9 +3,9 @@ package provider
 import (
 	"context"
 	"fmt"
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/service/msgbus"
-	"github.com/ramadhia/mnc-test/internal/storage"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/service/msgbus"
+	"github.com/ramadhia/dataon-test/internal/storage"
 )
 
 type ProviderBuilder interface {

@@ -3,12 +3,12 @@ package middleware
 import (
 	"errors"
 	"fmt"
+	"github.com/ramadhia/dataon-test/internal/model"
 	"github.com/shortlyst-ai/go-helper"
 	"net/http"
 	"strings"
 
-	"github.com/ramadhia/mnc-test/internal/handler/http/response"
-	"github.com/ramadhia/mnc-test/internal/model"
+	"github.com/ramadhia/dataon-test/internal/handler/http/response"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"

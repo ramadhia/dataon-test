@@ -5,16 +5,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ramadhia/mnc-test/internal/config"
-	"github.com/ramadhia/mnc-test/internal/provider"
+	"github.com/ramadhia/dataon-test/internal/config"
+	"github.com/ramadhia/dataon-test/internal/provider"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "cli-go",
-	Short: "cli go",
+	Use:   "dataon-go",
+	Short: "dataon go",
 }
 
 func init() {
@@ -37,12 +37,7 @@ func main() {
 
 func registerCommands(builder provider.ProviderBuilder) *cobra.Command {
 	rootCmd.AddCommand(Server(builder))
-	rootCmd.AddCommand(Worker(builder))
 	rootCmd.AddCommand(Migrate())
-	rootCmd.AddCommand(AlgoTest1(builder))
-	rootCmd.AddCommand(AlgoTest2(builder))
-	rootCmd.AddCommand(AlgoTest3(builder))
-	rootCmd.AddCommand(AlgoTest4(builder))
 
 	return rootCmd
 }
