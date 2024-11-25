@@ -78,6 +78,7 @@ make run-worker
 #### 3.6 Accessing Services
 
 - **Backend API**: Accessible on `http://localhost:40001`
+- - You can access this API `localhost:40001/organizations` or `localhost:15000/organizations` to fetch the structure organization data
 - **PostgreSQL**: Accessible on `localhost:45432` (username: `root`, password: `password`)
 
 ---
